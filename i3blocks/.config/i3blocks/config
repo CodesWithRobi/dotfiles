@@ -1,0 +1,190 @@
+# i3blocks EndeavourOS config file tweaked by void
+
+# source for the original config is available here:
+# https://raw.githubusercontent.com/endeavouros-team/endeavouros-i3wm-setup/main/etc/skel/.config/i3/i3blocks.conf
+
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i2blocks
+
+
+# List of valid properties:
+#
+# align
+# color
+# command
+# full_text
+# instance
+# interval
+# label
+# min_width
+# name
+# separator
+# separator_block_width
+# short_text
+# signal
+# urgent
+
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+separator=false
+markup=pango
+separator_block_width=15
+
+# [Weather]
+#command=~/.config/i3/scripts/openweather
+# or:
+# command=~/.config/i3blocks/scripts/weather_NOAA/weather_NOAA
+# interval=1800
+# color=#6969a8
+
+[simple-2]
+full_text=" "
+
+#[terminal]
+#full_text=  
+#color=#807dfe
+#command=i3-msg -q exec xfce4-terminal
+
+#[browser]
+#full_text=  
+#color=#ff7f81
+#command=i3-msg -q exec firefox
+
+#[files]
+#full_text=  
+#color=#7f3fbf
+#command=i3-msg -q exec thunar ~/
+
+#[mail]
+#full_text=  
+#color=#dbcb75
+#command=i3-msg -q exec thunderbird
+
+# Disk usage
+#
+# The directory defaults to $HOME if the instance is not specified.
+# The script may be called with a optional argument to set the alert
+# (defaults to 10 for 10%).
+[disk]
+# label= 
+instance=/
+command=~/.config/i3blocks/scripts/disk_usage/disk_usage
+interval=once
+# color=#ef6191
+color=#9392db
+
+# Memory usage
+#
+# The type defaults to "mem" if the instance is not specified.
+[memory]
+label= 
+command=~/.config/i3blocks/scripts/memory/memory
+interval=30
+# color=#b967c7
+color=#9691e3
+
+[cpu_usage]
+label= 
+command=~/.config/i3blocks/scripts/cpu_usage/cpu_usage
+interval=10
+
+[CPU-temperature]
+label=
+command=~/.config/i3blocks/scripts/temperature/temperature
+interval=30
+# color=#4ec2f7
+#T_WARN=70
+#T_CRIT=90
+#SENSOR_CHIP=""
+# where SENSOR_CHIP can be find with sensors output
+# can be used also for GPU temperature or other temperature sensors lm-sensors detects.
+
+# showing name of connected network (enable for wifi use)
+[volume]
+label= 
+command=~/.config/i3blocks/scripts/volume/volume
+instance=Master
+interval=once
+signal=12
+# color=#ff00a2
+# color=#f77b71
+
+# [simple-2]
+# full_text=" "
+
+[net]
+label= 
+command=echo "$(LANG=C nmcli d | grep connected | awk '{print $4}' | head -n 1)"
+interval=30
+# color=#ddf11b
+# color=#ea4335
+color=#7a6bc3
+
+# [simple-2]
+# full_text=" "
+
+# power-profiles-daemon implementation:
+# needs package power-profiles-daemon installed and the service running see here:
+# https://wiki.archlinux.org/title/CPU_frequency_scaling#power-profiles-daemon
+
+[battery-poly]
+command=~/.config/i3blocks/scripts/battery-poly/battery-poly
+label=󰄌   
+interval=5
+# color=#7ec381
+
+#set power-profile
+[ppd_menu]
+full_text=
+command=~/.config/i3blocks/scripts/power_profiles/power_profiles.sh
+# color=#a5a5ff
+color=#655ba3
+
+#Show the current power-profile
+[ppd-status]
+command=~/.config/i3blocks/scripts/ppd_status/ppd_status
+# interval=5
+interval=once
+# color=#a5a5ff
+color=#62539e
+signal=15
+
+# [rofi-calendar]
+# command=~/.config/i3blocks/scripts/rofi-calendar/rofi-calendar
+# interval=3600
+# BAR_POSITION=bottom
+#WEEK_START=monday
+#DATEFTM=+%a %d %b %Y
+#SHORTFMT=+%d/%m/%Y
+#LABEL= 
+#FONT=Monospace 10
+#LEFTCLICK_PREV_MONTH=false
+#PREV_MONTH_TEXT=« previous month «
+#NEXT_MONTH_TEXT=» next month »
+#ROFI_CONFIG_FILE=/dev/null
+
+[time]
+#label= 
+command=date '+%a %d %I:%M:%S %p'
+# command=date '+%H:%M:%S'
+interval=1
+min_width=144
+align=center
+# color=#ef6191
+color=#55478a
+
+[shutdown_menu]
+full_text= 
+command=~/.config/rofi/powermenu/type-5/powermenu.sh
+color=#4a3c77
+#4a3c77
+#55478a
+#62539e
+#6f60b2
+#7a6bc3
+#8375cf
+#8b7fd8
+#9288df
+#9691e3
+#9192bb

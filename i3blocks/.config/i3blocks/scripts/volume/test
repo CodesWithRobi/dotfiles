@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+get_color() {
+  local volume=$(echo $1|tr -d '[]%' || echo 0)
+  # Split start and end colors into RGB
+  local r1=$((0xff)) g1=$((0xff)) b1=$((0xa2)) # Start color (#ffffa2)
+  local r2=$((0xff)) g2=$((0x00)) b2=$((0xa2)) # End color (#ff00a2)
+
+  # Calculate the interpolated color based on volume
+  local r=$(printf "%02x" $((r1 + (r2 - r1) * volume / 100)))
+  local g=$(printf "%02x" $((g1 + (g2 - g1) * volume / 100)))
+  local b=$(printf "%02x" $((b1 + (b2 - b1) * volume / 100)))
+
+  echo "#$r$g$b"
+}
+
+# echo "10%" | tr -d '[]%' || echo 0
+echo $(get_color "50%")
