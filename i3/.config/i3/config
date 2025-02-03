@@ -29,6 +29,7 @@ bindsym Mod4+Shift+x exec --no-startup-id ~/i3_setup/rofi_scripts/launcher.sh
 # bindsym XF86PowerOff exec --no-startup-id ~/i3_setup/rofi_scripts/powermenu.sh
 # --
 bindsym XF86PowerOff exec --no-startup-id ~/.config/rofi/powermenu/type-5/powermenu.sh
+bindsym XF86Favorites exec --no-startup-id ~/.config/i3/toggletouchpad.sh
 bindsym Mod4+x exec --no-startup-id ~/.config/rofi/launchers/type-6/launcher.sh
 # --
 bindsym Mod4+r exec --no-startup-id ~/.config/rofi/applets/bin/appasroot.sh
@@ -328,4 +329,4 @@ strip_workspace_numbers yes
 # Launch apps on specific workspaces at startup
 exec --no-startup-id i3-msg 'workspace $ws2; exec kitty'
 exec --no-startup-id i3-msg 'workspace $ws3; exec firefox'
-exec --no-startup-id i3-msg workspace $ws1
+exec --no-startup-id i3-msg 'workspace $ws1'
