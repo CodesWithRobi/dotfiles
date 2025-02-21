@@ -20,7 +20,7 @@ exec --no-startup-id picom
 exec_always --no-startup-id /usr/bin/feh --bg-scale '/home/sec/wallpapers/luce.png'
 # exec --no-startup-id compton
 # exec_always --no-startup-id bash ~/.config/polybar/launch.sh --forest
-exec --no-startup-id setxkbmap -layout custom
+# exec --no-startup-id setxkbmap -layout custom
 
 # Start gsd-xsettings for Dracula theme to be used
 # exec --no-startup-id /usr/lib/gnome-settings-daemon/gsd-xsettings
