@@ -110,3 +110,10 @@ export XDG_DATA_DIRS="/home/linuxbrew/.linuxbrew/share:$XDG_DATA_DIRS"
 source <(fzf --zsh)
 
 export PATH="$PATH:/home/sec/.local/share/bob/nvim-bin"
+
+export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
+export PATH=$JAVA_HOME/bin:$PATH
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
