@@ -42,7 +42,10 @@ local servers = {
       },
     },
   },
-  jdtls = {},
+  -- jdtls = {
+  --   cmd = { vim.fn.stdpath "data" .. "/mason/bin/jdtls" },
+  --   root_dir = require("lspconfig.util").root_pattern(".git", "mvnw", "gradlew"),
+  -- },
 }
 
 for name, opts in pairs(servers) do
@@ -54,3 +57,11 @@ for name, opts in pairs(servers) do
 end
 --
 -- lspconfig.pyright.setup { blabla}
+--
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "java",
+  callback = function()
+    require("configs.jdtls").setup()
+  end,
+})

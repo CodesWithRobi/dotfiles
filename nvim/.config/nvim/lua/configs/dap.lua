@@ -55,3 +55,28 @@ dap.adapters.debugpy = {
     args = {"--port", "${port}"},
   }
 }
+--
+-- local mason_path = vim.fn.stdpath("data") .. "/mason/packages/java-debug-adapter"
+--
+-- dap.adapters.java = {
+--   type = "executable",
+--   command = "java",
+--   args = {
+--     "-jar",
+--     mason_path .. "/extension/server/com.microsoft.java.debug.plugin.jar",
+--   },
+-- }
+--
+-- dap.configurations.java = {
+--   {
+--     type = "java",
+--     request = "launch",
+--     name = "Launch Java App",
+--     mainClass = function()
+--       return require("java.utils").resolve_main_class()
+--     end,
+--     projectName = function()
+--       return vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+--     end,
+--   },
+-- }
