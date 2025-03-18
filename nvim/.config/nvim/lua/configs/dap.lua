@@ -1,4 +1,4 @@
-local dap = require("dap")
+local dap = require "dap"
 
 dap.adapters["pwa-node"] = {
   type = "server",
@@ -6,7 +6,7 @@ dap.adapters["pwa-node"] = {
   port = 8123,
   executable = {
     command = "js-debug-adapter",
-  }
+  },
 }
 
 for _, language in ipairs { "typescript", "javascript" } do
@@ -21,17 +21,16 @@ for _, language in ipairs { "typescript", "javascript" } do
   }
 end
 
-
 dap.adapters.codelldb = {
   type = "server",
   port = "${port}",
   executable = {
     command = "codelldb",
-    args = {"--port", "${port}"},
-  }
+    args = { "--port", "${port}" },
+  },
 }
 
-for _, language in ipairs({ "c", "cpp", "rust", "zig" }) do
+for _, language in ipairs { "c", "cpp", "rust", "zig" } do
   dap.configurations[language] = {
     {
       name = "Launch executable",
@@ -47,13 +46,26 @@ for _, language in ipairs({ "c", "cpp", "rust", "zig" }) do
   }
 end
 
-dap.adapters.debugpy = {
+dap.adapters.python = {
   type = "server",
-  port = "${port}",
+  port = 5678,
   executable = {
-    command = "debugpy",
-    args = {"--port", "${port}"},
-  }
+    command = "debugpy", -- Uses the debugpy executable from your PATH
+    args = { "--listen", "127.0.0.1:5678" },
+  },
+}
+
+dap.configurations.python = {
+  {
+    type = "python",
+    request = "launch",
+    name = "Launch file",
+    program = "${file}",
+    pythonPath = function()
+      return "python3" -- Adjust if using a virtual environment
+    end,
+    args = { "-Xfrozen_modules=off" }, -- Fix the frozen module warning
+  },
 }
 --
 -- local mason_path = vim.fn.stdpath("data") .. "/mason/packages/java-debug-adapter"

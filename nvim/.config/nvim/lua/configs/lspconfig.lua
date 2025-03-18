@@ -42,6 +42,7 @@ local servers = {
       },
     },
   },
+  ruff = {},
   -- jdtls = {
   --   cmd = { vim.fn.stdpath "data" .. "/mason/bin/jdtls" },
   --   root_dir = require("lspconfig.util").root_pattern(".git", "mvnw", "gradlew"),

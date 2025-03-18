@@ -101,6 +101,18 @@ local plugins = {
     end
   },
 
+  {
+    "mfussenegger/nvim-dap-python",
+    ft = "python",
+    dependencies = {
+      "mfussenegger/nvim-dap"
+    },
+    config = function (_)
+      local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
+      require("dap-python").setup(path)
+    end
+  },
+
   { "nvim-neotest/nvim-nio" },
   {"ThePrimeagen/vim-be-good"},
   {'mfussenegger/nvim-jdtls'},
