@@ -17,7 +17,7 @@ exec --no-startup-id picom
 # exec_always --no-startup-id /usr/bin/feh --bg-scale '/home/sec/wallpapers/holyfamily1.png'
 # exec_always --no-startup-id /usr/bin/feh --bg-scale '/home/sec/wallpapers/article-italy-rome-capuchin-crypt-wallpaper-purpled.png'
 # exec_always --no-startup-id /usr/bin/feh --bg-scale '/home/sec/wallpapers/ChiRho.png'
-exec_always --no-startup-id /usr/bin/feh --bg-scale '/home/sec/wallpapers/luce.png'
+exec_always --no-startup-id /usr/bin/feh --no-fehbg --bg-scale '/home/sec/wallpapers/luce.png'  '/home/sec/wallpapers/luce.png'
 # exec --no-startup-id compton
 # exec_always --no-startup-id bash ~/.config/polybar/launch.sh --forest
 # exec --no-startup-id setxkbmap -layout custom
