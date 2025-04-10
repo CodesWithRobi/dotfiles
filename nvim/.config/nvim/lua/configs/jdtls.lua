@@ -6,14 +6,13 @@ local function get_jdtls_paths()
   local java_dbg_path = mason_registry.get_package("java-debug-adapter"):get_install_path()
   local java_test_path = mason_registry.get_package("java-test"):get_install_path()
 
-  -- Collect all debug and test jar bundles
   local bundles = {}
   vim.list_extend(bundles, vim.split(vim.fn.glob(java_dbg_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar"), "\n"))
   vim.list_extend(bundles, vim.split(vim.fn.glob(java_test_path .. "/extension/server/*.jar"), "\n"))
 
   return {
     jdtls_jar = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
-    jdtls_config = jdtls_path .. "/config_linux",
+    jdtls_config = jdtls_path .. "/config_linux", -- Change if needed
     bundles = bundles,
   }
 end
@@ -26,6 +25,9 @@ M.setup = function()
     vim.notify("JDTLS launcher JAR not found!", vim.log.levels.ERROR)
     return
   end
+
+  -- Determine project root; for single files, fallback to current directory.
+  local root = vim.fs.root(0, { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }) or vim.fn.getcwd()
 
   local config = {
     cmd = {
@@ -41,9 +43,9 @@ M.setup = function()
       "--add-opens", "java.base/java.lang=ALL-UNNAMED",
       "-jar", paths.jdtls_jar,
       "-configuration", paths.jdtls_config,
-      "-data", vim.fn.expand("~/.cache/jdtls/workspace/") .. vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t"),
+      "-data", vim.fn.expand("~/.cache/jdtls/workspace/") .. vim.fn.fnamemodify(root, ":p:h:t"),
     },
-    root_dir = vim.fs.root(0, { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }),
+    root_dir = root,
     settings = {
       java = {
         signatureHelp = { enabled = true },
@@ -53,17 +55,25 @@ M.setup = function()
     init_options = {
       bundles = paths.bundles,
     },
+    -- This on_attach will be called after the client attaches.
+    on_attach = function(client, bufnr)
+      if not vim.api.nvim_buf_is_valid(bufnr) then return end
+      vim.notify("JDTLS attached to buffer " .. bufnr)
+      -- Register buffer-local keymaps, autocommands, etc.
+      -- For example, setting up LSP signature (if not already handled elsewhere):
+      -- vim.api.nvim_create_autocmd("CursorHoldI", {
+      --   buffer = bufnr,
+      --   callback = function() require("nvchad.lsp.signature").setup() end,
+      -- })
+    end,
   }
 
-  jdtls.start_or_attach(config)
+  local client = jdtls.start_or_attach(config)
 
-  -- Delay DAP setup to ensure jdtls is ready
-  vim.defer_fn(function()
+  -- Setup DAP after jdtls
+  if client then
     jdtls.setup_dap({ hotcodereplace = "auto" })
-
-    -- If using signature help plugin (optional)
-    -- require("nvchad.lsp.signature").setup()
-  end, 100)
+  end
 end
 
 return M
