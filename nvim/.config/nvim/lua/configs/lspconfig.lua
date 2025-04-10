@@ -60,9 +60,9 @@ end
 -- lspconfig.pyright.setup { blabla}
 --
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "java",
+vim.api.nvim_create_autocmd("BufReadPost", {
+  pattern = "*.java",
   callback = function()
-    require("configs.jdtls").setup()
+    vim.schedule(function() require("configs.jdtls").setup() end)
   end,
 })
