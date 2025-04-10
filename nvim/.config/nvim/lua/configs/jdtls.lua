@@ -59,6 +59,10 @@ M.setup = function()
     on_attach = function(client, bufnr)
       if not vim.api.nvim_buf_is_valid(bufnr) then return end
       vim.notify("JDTLS attached to buffer " .. bufnr)
+      vim.api.nvim_exec_autocmds("LspAttach", {
+        buffer = bufnr,
+        data = { client_id = client.id },
+      })
       -- Register buffer-local keymaps, autocommands, etc.
       -- For example, setting up LSP signature (if not already handled elsewhere):
       -- vim.api.nvim_create_autocmd("CursorHoldI", {
@@ -72,6 +76,14 @@ M.setup = function()
 
   -- Setup DAP after jdtls
   if client then
+
+    -- Let nvim-cmp, signature help, code actions, etc., know about it
+    vim.api.nvim_exec_autocmds("User", { pattern = "LspAttached" })
+
+    -- Call your NvChad LSP attach logic if needed
+    local custom_on_attach = require("nvchad.configs.lspconfig").on_attach
+    custom_on_attach(client, vim.api.nvim_get_current_buf())
+
     jdtls.setup_dap({ hotcodereplace = "auto" })
   end
 end
