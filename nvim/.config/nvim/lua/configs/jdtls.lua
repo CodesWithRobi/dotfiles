@@ -50,6 +50,7 @@ M.setup = function()
       java = {
         signatureHelp = { enabled = true },
         contentProvider = { preferred = "fernflower" },
+        compilerOptions = { "--enable-preview" }  -- Enable preview features
       },
     },
     init_options = {
@@ -86,6 +87,21 @@ M.setup = function()
 
     jdtls.setup_dap({ hotcodereplace = "auto" })
   end
+
+  -- Monkey-patch to prevent errors when classfile is opened before client is ready
+  local original_open = jdtls.open_classfile
+  jdtls.open_classfile = function(opts)
+    local jdtls_client = vim.iter(vim.lsp.get_clients({ name = "jdtls" })):next()
+    local bufnr = opts and opts.buf or vim.api.nvim_get_current_buf()
+
+    if jdtls_client then
+      vim.lsp.buf_attach_client(bufnr, jdtls_client.id)
+      original_open(opts)
+    else
+      vim.notify("Cannot open classfile: no active JDTLS client", vim.log.levels.ERROR)
+    end
+  end
+
 end
 
 return M
