@@ -116,6 +116,11 @@ local plugins = {
   { "nvim-neotest/nvim-nio" },
   {"ThePrimeagen/vim-be-good"},
   {'mfussenegger/nvim-jdtls'},
+
+  -- Blink plugin test
+  {
+    import = "nvchad.blink.lazyspec"
+  },
   -- {
   --   "nvim-java/nvim-java",
   --   lazy = false,

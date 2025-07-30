@@ -35,7 +35,7 @@ bindsym Mod4+x exec --no-startup-id ~/.config/rofi/launchers/type-6/launcher.sh
 bindsym Mod4+r exec --no-startup-id ~/.config/rofi/applets/bin/appasroot.sh
 bindsym Mod4+a exec --no-startup-id ~/.config/rofi/applets/bin/apps.sh
 bindsym Mod4+m exec --no-startup-id ~/.config/rofi/applets/bin/mpd.sh
-bindsym Mod4+v exec --no-startup-id ~/.config/rofi/applets/bin/volume.sh
+bindsym Mod4+Shift+v exec --no-startup-id ~/.config/rofi/applets/bin/volume.sh
 bindsym Mod4+b exec --no-startup-id ~/.config/rofi/applets/bin/battery.sh
 bindsym Mod4+Shift+p exec --no-startup-id ~/.config/rofi/applets/bin/powermenu.sh
 bindsym Mod4+Shift+b exec --no-startup-id ~/.config/rofi/applets/bin/brightness.sh
@@ -114,10 +114,10 @@ bindsym Mod4+k focus up
 bindsym Mod4+l focus right
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
+# bindsym $mod+Left focus left
+# bindsym $mod+Down focus down
+# bindsym $mod+Up focus up
+# bindsym $mod+Right focus right
 
 # move focused window
 bindsym Mod4+Shift+h move left
@@ -132,10 +132,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym Mod4+Right split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+bindsym Mod4+Down split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
