@@ -1,10 +1,10 @@
 local M = {}
 
 local function get_jdtls_paths()
-  local mason_registry = require("mason-registry")
-  local jdtls_path = mason_registry.get_package("jdtls"):get_install_path()
-  local java_dbg_path = mason_registry.get_package("java-debug-adapter"):get_install_path()
-  local java_test_path = mason_registry.get_package("java-test"):get_install_path()
+  local mason_path = vim.fn.stdpath("data") .. "/mason"
+  local jdtls_path = mason_path .. "/packages/jdtls"
+  local java_dbg_path = mason_path .. "/packages/java-debug-adapter"
+  local java_test_path = mason_path .. "/packages/java-test"
 
   local bundles = {}
   vim.list_extend(bundles, vim.split(vim.fn.glob(java_dbg_path .. "/extension/server/com.microsoft.java.debug.plugin-*.jar"), "\n"))

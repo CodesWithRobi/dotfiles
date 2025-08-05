@@ -50,7 +50,9 @@ M.mason = {
     "black",
 
     --java stuff
-    "jdtls"
+    "jdtls",
+    "java-debug-adapter",
+    "java-test"
   },
 }
 
