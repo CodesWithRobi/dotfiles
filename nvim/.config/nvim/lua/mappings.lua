@@ -5,9 +5,6 @@ map("n", "<C-d>", "<C-d>zz", { desc = "Move down centered" })
 map("n", "<C-u>", "<C-u>zz", { desc = "Move up centered" })
 map("n", "n", "nzzzv", { desc = "Center while searching next" })
 map("n", "N", "Nzzzv", { desc = "Center while searching next (backward)" })
-map("n", "<leader>fm", function()
-  require("conform").format()
-end, { desc = "Format with conform" })
 
 -- Visual mode mappings
 map("v", ">", ">gv", { desc = "Indent and reselect" })

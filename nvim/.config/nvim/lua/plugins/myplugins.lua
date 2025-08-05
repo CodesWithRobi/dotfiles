@@ -1,4 +1,4 @@
-local overrides = require("configs.overrides")
+local overrides = require "configs.overrides"
 local map = vim.keymap.set
 
 ---@type NvPluginSpec[]
@@ -47,19 +47,19 @@ local plugins = {
     event = "VeryLazy",
     dependencies = "mfussenegger/nvim-dap",
     config = function()
-      local dap = require("dap")
-      local dapui = require("dapui")
+      local dap = require "dap"
+      local dapui = require "dapui"
       require("dapui").setup()
-      dap.listeners.after.event_initialized["dapui_config"] = function ()
-       dapui.open()
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
       end
-      dap.listeners.before.event_terminated["dapui_config"] = function ()
-       dapui.close()
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
       end
-      dap.listeners.before.event_exited["dapui_config"] = function ()
-       dapui.close()
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
       end
-    end
+    end,
   },
   {
     "max397574/better-escape.nvim",
@@ -89,37 +89,48 @@ local plugins = {
     },
     config = function()
       require("nvim-ts-autotag").setup()
-    end
+    end,
   },
 
   {
     "mfussenegger/nvim-dap",
     config = function()
       require "configs.dap"
-    --   map("n", "<leader>db", "<cmd>DapToggleBreakpoint<CR>", { desc = "Add breakpoint at line" })
-    --   map("n", "<leader>dr", "<cmd>DapContinue<CR>", { desc = "Run or continue the debugger" })
-    end
+      --   map("n", "<leader>db", "<cmd>DapToggleBreakpoint<CR>", { desc = "Add breakpoint at line" })
+      --   map("n", "<leader>dr", "<cmd>DapContinue<CR>", { desc = "Run or continue the debugger" })
+    end,
   },
 
   {
     "mfussenegger/nvim-dap-python",
     ft = "python",
     dependencies = {
-      "mfussenegger/nvim-dap"
+      "mfussenegger/nvim-dap",
     },
-    config = function (_)
+    config = function(_)
       local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
       require("dap-python").setup(path)
-    end
+    end,
   },
 
   { "nvim-neotest/nvim-nio" },
-  {"ThePrimeagen/vim-be-good"},
-  {'mfussenegger/nvim-jdtls'},
+  { "ThePrimeagen/vim-be-good" },
+  { "mfussenegger/nvim-jdtls" },
+  { "echasnovski/mini.nvim", version = "*" },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    ft = "markdown",
+    dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+    ---@module 'render-markdown'
+    ---@type render.md.UserConfig
+    opts = {},
+  },
 
   -- Blink plugin test
   {
-    import = "nvchad.blink.lazyspec"
+    import = "nvchad.blink.lazyspec",
   },
   -- {
   --   "nvim-java/nvim-java",
@@ -146,52 +157,51 @@ local plugins = {
   --     -- require("java").setup {}
   --   end,
   -- },
- -- {
- --  "nvim-java/nvim-java",
- --  config = false,
- --  dependencies = {
- --    {
- --      "neovim/nvim-lspconfig",
- --      opts = {
- --        servers = {
- --          -- Your JDTLS configuration goes here
- --          jdtls = {
- --            -- settings = {
- --            --   java = {
- --            --     configuration = {
- --            --       runtimes = {
- --            --         {
- --            --           name = "JavaSE-23",
- --            --           path = "/usr/local/sdkman/candidates/java/23-tem",
- --            --         },
- --            --       },
- --            --     },
- --            --   },
- --            -- },
- --          },
- --        },
- --        setup = {
- --          jdtls = function()
- --            -- Your nvim-java configuration goes here
- --            require("java").setup({
- --              -- root_markers = {
- --              --   "settings.gradle",
- --              --   "settings.gradle.kts",
- --              --   "pom.xml",
- --              --   "build.gradle",
- --              --   "mvnw",
- --              --   "gradlew",
- --              --   "build.gradle",
- --              --   "build.gradle.kts",
- --              -- },
- --            })
- --          end,
- --        },
- --      },
- --    },
- --  },
--- },
-
+  -- {
+  --  "nvim-java/nvim-java",
+  --  config = false,
+  --  dependencies = {
+  --    {
+  --      "neovim/nvim-lspconfig",
+  --      opts = {
+  --        servers = {
+  --          -- Your JDTLS configuration goes here
+  --          jdtls = {
+  --            -- settings = {
+  --            --   java = {
+  --            --     configuration = {
+  --            --       runtimes = {
+  --            --         {
+  --            --           name = "JavaSE-23",
+  --            --           path = "/usr/local/sdkman/candidates/java/23-tem",
+  --            --         },
+  --            --       },
+  --            --     },
+  --            --   },
+  --            -- },
+  --          },
+  --        },
+  --        setup = {
+  --          jdtls = function()
+  --            -- Your nvim-java configuration goes here
+  --            require("java").setup({
+  --              -- root_markers = {
+  --              --   "settings.gradle",
+  --              --   "settings.gradle.kts",
+  --              --   "pom.xml",
+  --              --   "build.gradle",
+  --              --   "mvnw",
+  --              --   "gradlew",
+  --              --   "build.gradle",
+  --              --   "build.gradle.kts",
+  --              -- },
+  --            })
+  --          end,
+  --        },
+  --      },
+  --    },
+  --  },
+  -- },
 
   -- To make a plugin not be loaded
   -- {

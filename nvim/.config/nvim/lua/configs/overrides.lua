@@ -24,6 +24,7 @@ M.treesitter = {
 }
 
 M.mason = {
+  log_level = vim.log.levels.DEBUG,
   ensure_installed = {
     -- lua stuff
     "lua-language-server",
@@ -47,6 +48,9 @@ M.mason = {
     "mypy",
     "ruff",
     "black",
+
+    --java stuff
+    "jdtls"
   },
 }
 
