@@ -40,7 +40,7 @@ bindsym Mod4+b exec --no-startup-id ~/.config/rofi/applets/bin/battery.sh
 bindsym Mod4+Shift+p exec --no-startup-id ~/.config/rofi/applets/bin/powermenu.sh
 bindsym Mod4+Shift+b exec --no-startup-id ~/.config/rofi/applets/bin/brightness.sh
 bindsym Mod4+q exec --no-startup-id ~/.config/rofi/applets/bin/quicklinks.sh
-bindsym Mod4+s exec --no-startup-id ~/.config/rofi/applets/bin/screenshot.sh
+bindsym Mod4+s exec --no-s<D-v>tartup-id ~/.config/rofi/applets/bin/screenshot.sh
 # --
 
 # Brightness controls
