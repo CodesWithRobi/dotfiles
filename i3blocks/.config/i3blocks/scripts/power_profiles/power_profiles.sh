@@ -209,7 +209,6 @@ case "$(powerprofilesctl get)" in
     pkill -SIGRTMIN+15 i3blocks
        ;;
     balanced) echo ""
-    cat /home/sec/.config/picom/picom_performance > /home/sec/.config/picom/picom.conf
     pkill -SIGRTMIN+15 i3blocks
        ;;
     power-saver) echo ""
