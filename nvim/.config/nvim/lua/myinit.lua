@@ -43,3 +43,24 @@ autocmd("VimEnter", {
 autocmd("VimLeavePre", {
   command = ":silent !kitty @ set-spacing padding=20 margin=10",
 })
+
+-- Save folds when leaving markdown buffers
+autocmd("BufWinLeave", {
+  pattern = "*.md",
+  command = "mkview",
+})
+
+-- Restore folds when reopening markdown buffers
+autocmd("BufWinEnter", {
+  pattern = "*.md",
+  command = "silent! loadview",
+})
+
+-- Run sync in background when quitting with todo.md open
+autocmd("VimLeavePre", {
+  pattern = "*/todo.md",
+  callback = function()
+    -- start detached process
+    vim.fn.jobstart({"bash", "-c", "~/Documents/CloudStorage/todo.sh & disown"})
+  end,
+})

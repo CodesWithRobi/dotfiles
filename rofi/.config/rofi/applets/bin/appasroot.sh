@@ -66,7 +66,7 @@ run_rofi() {
 
 # Execute Command
 run_cmd() {
-	polkit_cmd="gnome-terminal -- zsh -c "
+	polkit_cmd="exec kitty -e zsh --no-rcs -c "
 	if [[ "$1" == '--opt1' ]]; then
 		${polkit_cmd} "sudo echo; exec sudo env PATH=$PATH DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY zsh"
 	elif [[ "$1" == '--opt2' ]]; then
