@@ -26,8 +26,6 @@
 
 local nvlsp = require "nvchad.configs.lspconfig"
 
-nvlsp.defaults() -- loads nvchad's defaults
-
 local servers = {
   html = {},
   cssls = {},
@@ -52,12 +50,11 @@ local servers = {
 for name, opts in pairs(servers) do
 
   -- !! Deprecated:
-  -- opts.on_init = nvlsp.on_init
-  -- opts.on_attach = nvlsp.on_attach
-  -- opts.capabilities = nvlsp.capabilities
   --
   -- require("lspconfig")[name].setup(opts)
 
+  opts.on_attach = nvlsp.on_attach
+  opts.capabilities = nvlsp.capabilities
   vim.lsp.config(name, opts)
   vim.lsp.enable(name)
 end

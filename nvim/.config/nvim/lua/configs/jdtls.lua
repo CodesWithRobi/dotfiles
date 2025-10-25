@@ -1,4 +1,5 @@
 local M = {}
+local nvlsp = require "nvchad.configs.lspconfig"
 
 local function get_jdtls_paths()
   local mason_path = vim.fn.stdpath("data") .. "/mason"
@@ -56,6 +57,7 @@ M.setup = function()
     init_options = {
       bundles = paths.bundles,
     },
+    capabilities = nvlsp.capabilities,
     -- This on_attach will be called after the client attaches.
     on_attach = function(client, bufnr)
       if not vim.api.nvim_buf_is_valid(bufnr) then return end
@@ -64,6 +66,7 @@ M.setup = function()
         buffer = bufnr,
         data = { client_id = client.id },
       })
+      nvlsp.on_attach(client, bufnr)
       -- Register buffer-local keymaps, autocommands, etc.
       -- For example, setting up LSP signature (if not already handled elsewhere):
       -- vim.api.nvim_create_autocmd("CursorHoldI", {
@@ -81,9 +84,10 @@ M.setup = function()
     -- Let nvim-cmp, signature help, code actions, etc., know about it
     vim.api.nvim_exec_autocmds("User", { pattern = "LspAttached" })
 
+    -- I guess this is removed now..:
     -- Call your NvChad LSP attach logic if needed
-    local custom_on_attach = require("nvchad.configs.lspconfig").on_attach
-    custom_on_attach(client, vim.api.nvim_get_current_buf())
+    -- local custom_on_attach = require("nvchad.configs.lspconfig").on_attach
+    -- custom_on_attach(client, vim.api.nvim_get_current_buf())
 
     jdtls.setup_dap({ hotcodereplace = "auto" })
   end
