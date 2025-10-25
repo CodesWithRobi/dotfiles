@@ -25,6 +25,7 @@
 -- }
 
 local nvlsp = require "nvchad.configs.lspconfig"
+nvlsp.defaults() -- loads nvchad's defaults
 
 local servers = {
   html = {},
