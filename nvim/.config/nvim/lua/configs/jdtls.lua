@@ -49,6 +49,15 @@ M.setup = function()
     root_dir = root,
     settings = {
       java = {
+        configuration = {
+          runtimes = {
+            {
+              name = "JavaSE-25", -- This is the name JDTLS will use
+              path = "/home/sec/.sdkman/candidates/java/current", -- !! IMPORTANT: Update this path to your Java 25 JDK
+              default = true, -- Make this the default
+            },
+          },
+        },
         signatureHelp = { enabled = true },
         contentProvider = { preferred = "fernflower" },
         compilerOptions = { "--enable-preview" }  -- Enable preview features
