@@ -9,11 +9,15 @@ M.override = {
   Comment = {
     italic = true,
   },
+  LspSignatureActiveParameter = {
+      -- link = "DiagnosticWarn",
+      fg = "#D0D000",  -- Makes it bright yellow
+      bold = true,
+    },
 }
 
 ---@type HLTable
 M.add = {
   NvimTreeOpenedFolderName = { fg = "green", bold = true },
 }
-
 return M
