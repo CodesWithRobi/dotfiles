@@ -31,17 +31,33 @@ local servers = {
   html = {},
   cssls = {},
   clangd = {},
-  pyright = {},
   jsonls = {},
-  ts_ls = {
-    init_options = {
-      preferences = {
-        disableSuggestions = true,
-        moduleResolution = "node",
+  -- ts_ls = {
+  --   init_options = {
+  --     preferences = {
+  --       disableSuggestions = true,
+  --       moduleResolution = "node",
+  --     },
+  --   },
+  -- },
+  pyright = { -- Only hovers
+    settings = {
+      python = {
+        analysis = {
+          typeCheckingMode = "off",
+          diagnosticMode = "openFilesOnly",
+        },
       },
     },
+    handlers = {
+      ["textDocument/publishDiagnostics"] = function() end,
+    },
   },
-  ruff = {},
+  ruff = { -- Except hovers
+    on_attach = function(client, _)
+      client.server_capabilities.hoverProvider = false
+    end,
+  },
   -- jdtls = {
   --   cmd = { vim.fn.stdpath "data" .. "/mason/bin/jdtls" },
   --   root_dir = require("lspconfig.util").root_pattern(".git", "mvnw", "gradlew"),
@@ -49,13 +65,19 @@ local servers = {
 }
 
 for name, opts in pairs(servers) do
-
   -- !! Deprecated:
-  --
   -- require("lspconfig")[name].setup(opts)
 
-  opts.on_attach = nvlsp.on_attach
+  local custom_on_attach = opts.on_attach
+
+  opts.on_attach = function(client, bufnr)
+    nvlsp.on_attach(client, bufnr)
+    if custom_on_attach then
+      custom_on_attach(client, bufnr)
+    end
+  end
   opts.capabilities = nvlsp.capabilities
+
   vim.lsp.config(name, opts)
   vim.lsp.enable(name)
 end
