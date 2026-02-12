@@ -28,7 +28,10 @@ M.setup = function()
   end
 
   -- Determine project root; for single files, fallback to current directory.
-  local root = vim.fs.root(0, { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }) or vim.fn.getcwd()
+  -- 
+  -- I don't want to check .git for project directory so commenting below
+  -- local root = vim.fs.root(0, { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }) or vim.fn.getcwd()
+  local root = vim.fs.root(0, { "mvnw", "gradlew", "pom.xml", "build.gradle" }) or vim.fn.getcwd()
 
   local config = {
     cmd = {
