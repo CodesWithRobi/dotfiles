@@ -115,6 +115,12 @@ local plugins = {
 
   { "nvim-neotest/nvim-nio" },
   { "ThePrimeagen/vim-be-good" },
+  {
+    "nvzone/typr",
+    dependencies = "nvzone/volt",
+    opts = {},
+    cmd = { "Typr", "TyprStats" },
+  },
   { "mfussenegger/nvim-jdtls" },
   { "echasnovski/mini.nvim", version = "*" },
   {
