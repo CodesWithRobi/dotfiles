@@ -12,12 +12,15 @@
 set $mod Mod1
 
 
-exec --no-startup-id picom
+# exec --no-startup-id picom
+exec --no-startup-id picom --backend glx --window-shader-fg ~/.config/i3/purplefast.glsl
+# exec --no-startup-id picom --backend glx --window-shader-fg ~/.config/i3/retro.glsl
 
 # exec_always --no-startup-id /usr/bin/feh --bg-scale '/home/sec/wallpapers/holyfamily1.png'
 # exec_always --no-startup-id /usr/bin/feh --bg-scale '/home/sec/wallpapers/article-italy-rome-capuchin-crypt-wallpaper-purpled.png'
 # exec_always --no-startup-id /usr/bin/feh --bg-scale '/home/sec/wallpapers/ChiRho.png'
-exec_always --no-startup-id /usr/bin/feh --no-fehbg --bg-scale '/home/sec/wallpapers/luce.png'  '/home/sec/wallpapers/luce.png'
+exec_always --no-startup-id /usr/bin/feh --no-fehbg --bg-scale '/home/sec/wallpapers/mementomori.png'  '/home/sec/wallpapers/mementomori.png'
+# exec_always --no-startup-id /usr/bin/feh --no-fehbg --bg-scale '/home/sec/wallpapers/mementomori2-purple.png'  '/home/sec/wallpapers/mementomori2-purple.png'
 # exec --no-startup-id compton
 # exec_always --no-startup-id bash ~/.config/polybar/launch.sh --forest
 # exec --no-startup-id setxkbmap -layout custom
@@ -73,7 +76,10 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -ef -i '/home/sec/wallpapers/keys.png' --nofork
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock -ef -i '/home/sec/wallpapers/keys.png' --nofork
+
+#Upgrade to i3lock-color
+exec --no-startup-id xss-lock --transfer-sleep-lock -- /home/sec/dotfiles/lock.sh
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.

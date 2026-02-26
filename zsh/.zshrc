@@ -122,3 +122,8 @@ bindkey '^[[24~' undefined-key
 export PATH="~/Android/Sdk/platform-tools:$PATH"
 
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
+
+# ZVM
+export ZVM_INSTALL="$HOME/.zvm/self"
+export PATH="$PATH:$HOME/.zvm/bin"
+export PATH="$PATH:$ZVM_INSTALL/"
