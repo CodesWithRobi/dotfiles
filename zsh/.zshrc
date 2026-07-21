@@ -23,6 +23,14 @@ ZSH_THEME="robbyrussell"
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
+# Better completion settings
+zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*' completer _expand _complete _match _prefix
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' 'r:|[._-]=**' 'l:|=* r:|=*'
+zstyle ':completion:*' special-dirs true
+
 # Uncomment one of the following lines to change the auto-update behavior
 # zstyle ':omz:update' mode disabled  # disable automatic updates
 # zstyle ':omz:update' mode auto      # update automatically without asking
@@ -70,7 +78,19 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  git
+  docker
+  docker-compose
+  npm
+  pip
+  brew
+  systemd
+  ubuntu
+  fzf
+  aliases
+  alias-finder
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -127,3 +147,21 @@ export MANPAGER="less -R --use-color -Dd+r -Du+b"
 export ZVM_INSTALL="$HOME/.zvm/self"
 export PATH="$PATH:$HOME/.zvm/bin"
 export PATH="$PATH:$ZVM_INSTALL/"
+
+# opencode
+export PATH=/home/sec/.opencode/bin:$PATH
+
+# Custom completions directory — add completion files (*_completion) here
+fpath=(~/.zsh/completions $fpath)
+
+# life-os quick capture
+inbox() {
+  local msg="$*"
+  local ts=$(date "+%Y-%m-%d %H:%M")
+  local life_os="$HOME/Projects/life-os"
+  mkdir -p "$life_os"
+  echo "- [ ] $msg  # captured $ts" >> "$life_os/inbox.md"
+  echo "Captured \u2192 inbox.md"
+}
+# inbox autocompletion: suggests "inbox <message>" with no file completion
+compdef _gnu_generic inbox
