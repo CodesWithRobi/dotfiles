@@ -122,6 +122,15 @@ local plugins = {
     cmd = { "Typr", "TyprStats" },
   },
   { "mfussenegger/nvim-jdtls" },
+
+  {
+    "JavaHello/spring-boot.nvim",
+    ft = { "java", "yaml", "jproperties" },
+    dependencies = {
+      "mfussenegger/nvim-jdtls",
+    },
+    opts = {},
+  },
   { "echasnovski/mini.nvim", version = "*" },
   {
     "MeanderingProgrammer/render-markdown.nvim",

@@ -23,6 +23,12 @@ M.setup = function()
   local jdtls = require("jdtls")
   local paths = get_jdtls_paths()
 
+  -- Add Spring Boot JDTLS extensions (for @Bean, @Controller etc.)
+  local spring_boot_ok, spring_boot = pcall(require, "spring_boot")
+  if spring_boot_ok then
+    vim.list_extend(paths.bundles, spring_boot.java_extensions())
+  end
+
   if paths.jdtls_jar == "" then
     vim.notify("JDTLS launcher JAR not found!", vim.log.levels.ERROR)
     return

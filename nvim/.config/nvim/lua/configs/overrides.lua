@@ -54,6 +54,7 @@ M.mason = {
     "jdtls",
     "java-debug-adapter",
     "java-test",
+    "vscode-spring-boot-tools",
 
     -- xml stuff
     "lemminx"
