@@ -58,6 +58,7 @@ local servers = {
       client.server_capabilities.hoverProvider = false
     end,
   },
+  lemminx = {},
   -- jdtls = {
   --   cmd = { vim.fn.stdpath "data" .. "/mason/bin/jdtls" },
   --   root_dir = require("lspconfig.util").root_pattern(".git", "mvnw", "gradlew"),
@@ -84,6 +85,11 @@ end
 --
 -- lspconfig.pyright.setup { blabla}
 --
+
+vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+  pattern = "pom.xml",
+  command = "set filetype=xml",
+})
 
 vim.api.nvim_create_autocmd("BufReadPost", {
   pattern = "*.java",

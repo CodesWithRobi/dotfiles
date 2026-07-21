@@ -53,7 +53,10 @@ M.mason = {
     --java stuff
     "jdtls",
     "java-debug-adapter",
-    "java-test"
+    "java-test",
+
+    -- xml stuff
+    "lemminx"
   },
 }
 
@@ -63,13 +66,21 @@ M.nvimtree = {
     enable = true,
   },
 
+  view = {
+    width = 50,
+  },
+
   renderer = {
+    indent_width = 1,
     highlight_git = true,
     icons = {
       show = {
         git = true,
       },
     },
+    group_empty = function(relative_path)
+      return relative_path:gsub("/", ".")
+    end,
   },
 }
 

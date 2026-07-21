@@ -4,6 +4,8 @@ require "nvchad.options"
 -- local o = vim.o
 -- o.cursorlineopt ='both' -- to enable cursorline!
 
+vim.o.wildmode = "longest:full,full"
+
 vim.g.netrw_banner = 0
 vim.g.netrw_liststyle = 3
 vim.g.netrw_winsize = 75

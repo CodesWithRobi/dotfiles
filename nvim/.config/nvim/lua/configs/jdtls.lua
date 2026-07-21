@@ -14,6 +14,7 @@ local function get_jdtls_paths()
   return {
     jdtls_jar = vim.fn.glob(jdtls_path .. "/plugins/org.eclipse.equinox.launcher_*.jar"),
     jdtls_config = jdtls_path .. "/config_linux", -- Change if needed
+    lombok_jar = jdtls_path .. "/lombok.jar",
     bundles = bundles,
   }
 end
@@ -42,6 +43,8 @@ M.setup = function()
       "-Dlog.protocol=true",
       "-Dlog.level=ALL",
       "-Xms1g",
+      "-javaagent:" .. paths.lombok_jar,
+      "-Xbootclasspath/a:" .. paths.lombok_jar,
       "--add-modules=ALL-SYSTEM",
       "--add-opens", "java.base/java.util=ALL-UNNAMED",
       "--add-opens", "java.base/java.lang=ALL-UNNAMED",
@@ -59,6 +62,11 @@ M.setup = function()
               path = "/home/sec/.sdkman/candidates/java/current", -- !! IMPORTANT: Update this path to your Java 25 JDK
               default = true, -- Make this the default
             },
+          },
+        },
+        inlayHints = {
+          parameterNames = {
+            enabled = "all",
           },
         },
         signatureHelp = { enabled = true },
@@ -106,13 +114,12 @@ M.setup = function()
 
   -- Monkey-patch to prevent errors when classfile is opened before client is ready
   local original_open = jdtls.open_classfile
-  jdtls.open_classfile = function(opts)
+  jdtls.open_classfile = function(buf, fname)
     local jdtls_client = vim.iter(vim.lsp.get_clients({ name = "jdtls" })):next()
-    local bufnr = opts and opts.buf or vim.api.nvim_get_current_buf()
 
     if jdtls_client then
-      vim.lsp.buf_attach_client(bufnr, jdtls_client.id)
-      original_open(opts)
+      vim.lsp.buf_attach_client(buf, jdtls_client.id)
+      original_open(buf, fname)
     else
       vim.notify("Cannot open classfile: no active JDTLS client", vim.log.levels.ERROR)
     end
