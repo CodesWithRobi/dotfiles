@@ -88,11 +88,19 @@ M.setup = function()
     on_attach = function(client, bufnr)
       if not vim.api.nvim_buf_is_valid(bufnr) then return end
       vim.notify("JDTLS attached to buffer " .. bufnr)
+
+      -- Force inlay hint support — JDT.LS doesn't always advertise it
+      client.server_capabilities = client.server_capabilities or {}
+      if not client.server_capabilities.inlayHintProvider then
+        client.server_capabilities.inlayHintProvider = {}
+      end
+
       vim.api.nvim_exec_autocmds("LspAttach", {
         buffer = bufnr,
         data = { client_id = client.id },
       })
       nvlsp.on_attach(client, bufnr)
+      -- vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
       -- Register buffer-local keymaps, autocommands, etc.
       -- For example, setting up LSP signature (if not already handled elsewhere):
       -- vim.api.nvim_create_autocmd("CursorHoldI", {
