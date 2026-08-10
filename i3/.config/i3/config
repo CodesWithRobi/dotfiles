@@ -12,14 +12,18 @@
 set $mod Mod1
 
 
-# exec --no-startup-id picom
-exec --no-startup-id picom --backend glx --window-shader-fg ~/.config/i3/purplefast.glsl
+exec --no-startup-id picom
+# clipboard history watcher (auto-capture text + images)
+exec --no-startup-id /home/sec/.local/bin/clipwatch
+# exec --no-startup-id picom --backend glx --window-shader-fg ~/.config/i3/purplefast.glsl
 # exec --no-startup-id picom --backend glx --window-shader-fg ~/.config/i3/retro.glsl
 
 # exec_always --no-startup-id /usr/bin/feh --bg-scale '/home/sec/wallpapers/holyfamily1.png'
 # exec_always --no-startup-id /usr/bin/feh --bg-scale '/home/sec/wallpapers/article-italy-rome-capuchin-crypt-wallpaper-purpled.png'
 # exec_always --no-startup-id /usr/bin/feh --bg-scale '/home/sec/wallpapers/ChiRho.png'
-exec_always --no-startup-id /usr/bin/feh --no-fehbg --bg-scale '/home/sec/wallpapers/mementomori.png'  '/home/sec/wallpapers/mementomori.png'
+# exec_always --no-startup-id /usr/bin/feh --no-fehbg --bg-scale '/home/sec/wallpapers/GodOfPeace.jpg'  '/home/sec/wallpapers/GodOfPeace.jpg'
+exec_always --no-startup-id /usr/bin/feh --no-fehbg --bg-scale '/home/sec/wallpapers/luce.png'  '/home/sec/wallpapers/luce.png'
+# exec_always --no-startup-id /usr/bin/feh --no-fehbg --bg-scale '/home/sec/wallpapers/mementomori.png'  '/home/sec/wallpapers/mementomori.png'
 # exec_always --no-startup-id /usr/bin/feh --no-fehbg --bg-scale '/home/sec/wallpapers/mementomori2-purple.png'  '/home/sec/wallpapers/mementomori2-purple.png'
 # exec --no-startup-id compton
 # exec_always --no-startup-id bash ~/.config/polybar/launch.sh --forest
@@ -38,12 +42,19 @@ bindsym Mod4+x exec --no-startup-id ~/.config/rofi/launchers/type-6/launcher.sh
 bindsym Mod4+r exec --no-startup-id ~/.config/rofi/applets/bin/appasroot.sh
 bindsym Mod4+a exec --no-startup-id ~/.config/rofi/applets/bin/apps.sh
 bindsym Mod4+m exec --no-startup-id ~/.config/rofi/applets/bin/mpd.sh
-bindsym Mod4+Shift+v exec --no-startup-id ~/.config/rofi/applets/bin/volume.sh
+bindsym Mod1+Shift+v exec --no-startup-id ~/.config/rofi/applets/bin/volume.sh
 bindsym Mod4+b exec --no-startup-id ~/.config/rofi/applets/bin/battery.sh
 bindsym Mod4+Shift+p exec --no-startup-id ~/.config/rofi/applets/bin/powermenu.sh
 bindsym Mod4+Shift+b exec --no-startup-id ~/.config/rofi/applets/bin/brightness.sh
 bindsym Mod4+q exec --no-startup-id ~/.config/rofi/applets/bin/quicklinks.sh
 bindsym Mod4+s exec --no-s<D-v>tartup-id ~/.config/rofi/applets/bin/screenshot.sh
+# --
+
+# Clipboard history (BreadOnPenguins style)
+bindsym Mod4+v exec --no-startup-id /home/sec/.local/bin/txtcliphist sel
+bindsym Mod4+Shift+v exec --no-startup-id /home/sec/.local/bin/txtcliphist add
+bindsym Mod4+i exec --no-startup-id env PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/sec/.local/bin:$PATH" /home/sec/.local/bin/cliphist sel
+bindsym Mod4+Shift+i exec --no-startup-id /home/sec/.local/bin/cliphist add
 # --
 
 # Brightness controls
@@ -97,10 +108,10 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a terminal
+# start a terminal (kitty + tmux, session named after focused dir basename)
 # bindsym $mod+Return exec i3-sensible-terminal
-bindsym Mod4+Return exec kitty
-bindsym Mod1+Return exec kitty
+bindsym Mod4+Return exec /home/sec/.local/bin/ktmux
+bindsym Mod1+Return exec /home/sec/.local/bin/ktmux
 
 # kill focused window
 bindsym Mod4+Shift+c kill
@@ -154,7 +165,6 @@ bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
-
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
@@ -273,6 +283,10 @@ default_floating_border pixel 1
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# Clipboard history menus float
+for_window [class="fzfmenu"] floating enable
+for_window [title="fzf"] floating enable
+
 # switch/iterate between workspaces
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
@@ -342,6 +356,6 @@ strip_workspace_numbers yes
 
 # Launch apps on specific workspaces at startup
 exec --no-startup-id i3-msg 'workspace $ws1'
-exec --no-startup-id i3-msg 'workspace $ws2; exec kitty'
+exec --no-startup-id i3-msg 'workspace $ws2; exec /home/sec/.local/bin/kitty'
 exec --no-startup-id i3-msg 'workspace $ws3; exec firefox'
 exec --no-startup-id i3-msg 'workspace $ws1'

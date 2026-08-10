@@ -19,8 +19,8 @@ end, { desc = "Run or continue the debugger" })
 
 -- Java
 map("n", "<leader>c", function()
-  vim.lsp.buf.code_action()
-end, { desc = "LSP Code Actions" })
+  require("actions-preview").code_actions()
+end, { desc = "Code Actions" })
 map("n", "<leader>ls", ":Telescope lsp_workspace_symbols<CR>", { desc = "Search workspace symbols" })
 map("n", "<leader>ih", function()
   vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })

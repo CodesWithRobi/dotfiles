@@ -1,5 +1,6 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -123,33 +124,33 @@ export VISUAL=nvim
 alias ivim='nvim $(fzf -m --preview="bat --color=always {}")'
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-export PATH="$HOME/.linuxbrew/lib/ruby/gems/3.3.0/bin:$PATH"
 export XDG_DATA_DIRS="/home/linuxbrew/.linuxbrew/share:$XDG_DATA_DIRS"
 
 # Set up fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 
-export PATH="$PATH:/home/sec/.local/share/bob/nvim-bin"
+# --- PATH: tooling (earlier entries win) ---
+export PATH="$PATH:/home/sec/.local/share/bob/nvim-bin"            # bob — nvim version manager
 
 export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
-export PATH=$JAVA_HOME/bin:$PATH
+export PATH="$JAVA_HOME/bin:$PATH"                                  # java (overridden by sdkman below)
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 bindkey '^[[24~' undefined-key
-export PATH="~/Android/Sdk/platform-tools:$PATH"
+
+export PATH="$HOME/Android/Sdk/platform-tools:$PATH"                # adb, fastboot
 
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 
-# ZVM
+# ZVM — zig version manager
 export ZVM_INSTALL="$HOME/.zvm/self"
-export PATH="$PATH:$HOME/.zvm/bin"
-export PATH="$PATH:$ZVM_INSTALL/"
+export PATH="$PATH:$HOME/.zvm/bin:$HOME/.zvm/self"
 
-# opencode
-export PATH=/home/sec/.opencode/bin:$PATH
+# opencode (prepend — keeps it frontmost)
+export PATH="/home/sec/.opencode/bin:$PATH"
 
 # Custom completions directory — add completion files (*_completion) here
 fpath=(~/.zsh/completions $fpath)

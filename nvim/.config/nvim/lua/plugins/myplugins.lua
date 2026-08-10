@@ -124,6 +124,14 @@ local plugins = {
   { "mfussenegger/nvim-jdtls" },
 
   {
+    "aznhe21/actions-preview.nvim",
+    event = "LspAttach",
+    opts = {
+      telescope = require("telescope.themes").get_dropdown(),
+    },
+  },
+
+  {
     "JavaHello/spring-boot.nvim",
     ft = { "java", "yaml", "jproperties" },
     dependencies = {
