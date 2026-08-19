@@ -3,6 +3,10 @@
 DIRS=(
     "$HOME/Projects"
     "$HOME/Learn"
+    "$HOME/Learn/java/"
+    "$HOME/Learn/java/SpringBoot/"
+    "$HOME/Learn/SEC/"
+    "$HOME/Learn/SEC/S7/"
 )
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"

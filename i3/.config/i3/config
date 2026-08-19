@@ -356,6 +356,6 @@ strip_workspace_numbers yes
 
 # Launch apps on specific workspaces at startup
 exec --no-startup-id i3-msg 'workspace $ws1'
-exec --no-startup-id i3-msg 'workspace $ws2; exec /home/sec/.local/bin/kitty'
+exec --no-startup-id i3-msg 'workspace $ws2; exec /home/sec/.local/bin/ktmux'
 exec --no-startup-id i3-msg 'workspace $ws3; exec firefox'
 exec --no-startup-id i3-msg 'workspace $ws1'

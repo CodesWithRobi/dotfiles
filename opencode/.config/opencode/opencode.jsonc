@@ -1,0 +1,29 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "-y", "@playwright/mcp"],
+      "enabled": false
+    },
+    "google-calendar": {
+      "type": "local",
+      "command": ["/home/sec/Projects/life-os/.venv/bin/python3", "/home/sec/Projects/life-os/scripts/gcal-bridge.py"],
+      "enabled": true,
+      "environment": {
+        "GOOGLE_SERVICE_ACCOUNT_KEY": "/home/sec/service-account-key.json"
+      }
+    }
+  },
+  "instructions": ["/home/sec/Projects/life-os/AGENTS.md"],
+  "command": {
+    "restructure": {
+      "description": "Restructure unfinished tasks into Google Calendar time blocks",
+      "template": "Run the life-os scheduling workflow: read inbox.md + ALL day files (sun.md through sat.md), fetch each day's events from primary calendar (rayercodes@gmail.com) to find free slots, apply priority tiers + constraint rules (including new #must marker Rule 9), create GCAL events, remove scheduled task lines from source files. Report what was scheduled AND what couldn't fit (with reasons)."
+    },
+    "restructure-unfinished": {
+      "description": "Restructure only today's unfinished tasks (skip inbox)",
+      "template": "Run the life-os scheduling workflow: read today's task file (not inbox.md), check today's calendar for free slots, apply constraint rules, create GCAL events, remove scheduled tasks."
+    }
+  }
+}
