@@ -1,0 +1,17 @@
+pane	home	1	0	:-	0	OC | Create or update AGENTS.md for repo	:/home/sec/AndroidStudioProjects/WiFiRoomLocator	1	opencode	:opencode -c
+pane	home	2	1	:*	0	:/home/sec/AndroidStudioProjects/RosaryTracker	1	opencode	9009	:/usr/bin/ly
+/home/sec/Projects/life-os/.venv/bin/python3 /home/sec/Projects/life-os/scripts/gcal-bridge.py
+/home/sec/Projects/life-os/.venv/bin/python3 /home/sec/Projects/life-os/scripts/gcal-bridge.py
+xclip -selection clipboard
+pane	home	3	0	:	0	avemaria	:/home/sec	1	zsh	:
+pane	sunday	1	0	:-	0	:/home/sec/Projects/sunday/chat	1	zsh	9712	:
+pane	sunday	2	1	:*	0	:/home/sec/Projects/sunday/chat	1	opencode	35841	:/usr/bin/ly
+/home/sec/Projects/life-os/.venv/bin/python3 /home/sec/Projects/life-os/scripts/gcal-bridge.py
+/home/sec/Projects/life-os/.venv/bin/python3 /home/sec/Projects/life-os/scripts/gcal-bridge.py
+xclip -selection clipboard
+window	home	1	:wifi	0	:-	ad3d,172x40,0,0,0	off
+window	home	2	:rosary	1	:*	ad3f,172x40,0,0,2	off
+window	home	3	:zsh	0	:	ad42,172x40,0,0,5	:
+window	sunday	1	:zsh	0	:-	ad41,172x40,0,0,4	off
+window	sunday	2	:opencode	1	:*	ad45,172x40,0,0,8	:
+state	home	sunday

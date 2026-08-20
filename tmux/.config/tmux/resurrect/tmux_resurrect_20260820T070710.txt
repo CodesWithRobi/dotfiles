@@ -1,0 +1,7 @@
+pane	home	1	1	:*	0	OC | LINUX	:/home/sec	1	opencode	:opencode
+pane	sunday	1	1	:*	0	avemaria	:/home/sec/Projects/sunday	1	nvim	:nvim .
+pane	sunday	2	0	:-	0	OC | Breaking plans into vertical slice ti...	:/home/sec/Projects/sunday/chat	1	opencode	:opencode
+window	home	1	:opencode	1	:*	ad3d,172x40,0,0,0	:
+window	sunday	1	:nvim	1	:*	ad40,172x40,0,0,3	:
+window	sunday	2	:opencode	0	:-	ad42,172x40,0,0,5	:
+state	sunday	home

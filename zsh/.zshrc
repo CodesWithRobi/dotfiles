@@ -123,6 +123,7 @@ export VISUAL=nvim
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ivim='nvim $(fzf -m --preview="bat --color=always {}")'
 alias update-skills='~/.local/bin/update-skills'
+alias sunday='opencode -s ses_fe2532eabffeS8xILiM4anL1s3'
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 export XDG_DATA_DIRS="/home/linuxbrew/.linuxbrew/share:$XDG_DATA_DIRS"
